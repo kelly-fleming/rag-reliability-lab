@@ -1,0 +1,62 @@
+[
+  {
+    "id": "q-001",
+    "question": "How should Nimbus Queue operators diagnose a growing job backlog and prevent immediate retries from amplifying it?",
+    "relevant_document_ids": ["doc-001", "doc-002"]
+  },
+  {
+    "id": "q-002",
+    "question": "What Atlas Ledger backup retention schedule applies, and how should an isolated restore rehearsal verify a retained snapshot?",
+    "relevant_document_ids": ["doc-003", "doc-004"]
+  },
+  {
+    "id": "q-003",
+    "question": "Which permissions should the Prism API runtime identity have for reading ledger summaries, and what should be checked after an authorization denial?",
+    "relevant_document_ids": ["doc-005"]
+  },
+  {
+    "id": "q-004",
+    "question": "How should temporary emergency operator access be approved, scoped, revoked, and reviewed?",
+    "relevant_document_ids": ["doc-006"]
+  },
+  {
+    "id": "q-005",
+    "question": "Name resolution succeeds, but Prism API connections to Atlas Ledger time out. How should forward routes, return routes, and firewall rules be investigated?",
+    "relevant_document_ids": ["doc-007"]
+  },
+  {
+    "id": "q-006",
+    "question": "After a service endpoint change, one resolver pool keeps returning an expired address. What cache correction and follow-up address this failure?",
+    "relevant_document_ids": ["doc-008"]
+  },
+  {
+    "id": "q-007",
+    "question": "How can repeated Cinder Archive restore copies cause cross-zone transfer cost increases, and how can those transfers be reduced without deleting backups?",
+    "relevant_document_ids": ["doc-009"]
+  },
+  {
+    "id": "q-008",
+    "question": "Orchid Compute costs rise while completed jobs stay flat and workers remain idle overnight. Which capacity configuration should be investigated before reducing the pool?",
+    "relevant_document_ids": ["doc-010"]
+  },
+  {
+    "id": "q-009",
+    "question": "How long should Prism API request diagnostic logs be retained, and which sensitive request data should be excluded?",
+    "relevant_document_ids": ["doc-011"]
+  },
+  {
+    "id": "q-010",
+    "question": "After Helix Cache restarts, how should summary keys be warmed and concurrent misses limited to protect Atlas Ledger?",
+    "relevant_document_ids": ["doc-012"]
+  },
+  {
+    "id": "q-011",
+    "question": "When Atlas Ledger replica lag increases, what throughput and storage checks and temporary read routing should operators use?",
+    "relevant_document_ids": ["doc-013"]
+  },
+  {
+    "id": "q-012",
+    "question": "Archive restore bursts cause Zephyr Gateway packet queue drops while routes and DNS are correct. How should copy concurrency and scheduling change?",
+    "relevant_document_ids": ["doc-014"]
+  }
+]

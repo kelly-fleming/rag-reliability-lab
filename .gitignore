@@ -1,0 +1,27 @@
+# Personal operator notes, plans, and automation (kept locally)
+/AGENTS.md
+
+# Python environments and generated artifacts
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+coverage/
+htmlcov/
+reports/
+outputs/
+build/
+dist/
+*.egg-info/
+
+# Local secrets; fictional source fixtures and uv.lock remain trackable
+.env
+.env.*
+!.env.example
+.secrets/
+.tokens/
+.api-token
+.api-token.*
