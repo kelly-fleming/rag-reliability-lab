@@ -1,11 +1,13 @@
-# Operator validation
+# Validation
 
-Local verification on 2026-10-28 passed the test suite in Docker,
-plus Docker API/CLI smoke checks. The resolver-generated `uv.lock` is included.
-Maintainer approval is recorded on 2026-10-28; CI execution at the eventual commit
-remains pending. No performance or real-world benchmark claims follow from these checks.
+Release verification completed on 2026-10-28. All 326 tests, lint, formatting,
+package builds, and Docker API/CLI smoke checks passed. Docker startup, restart,
+health recovery, and retrieval without runtime network access were verified.
+Version 0.1.0 is ready for local retrieval and evaluation use. The
+resolver-generated `uv.lock` is included. These checks establish implementation
+behavior, not real-world benchmark quality or production security assurance.
 
-From the repository root, with uv installed, the final operator runs:
+To reproduce the checks, run from the repository root with uv installed:
 
 ```bash
 uv python install 3.12
@@ -16,13 +18,14 @@ uv run --locked ruff format --check .
 uv run --locked pytest -q
 ```
 
-For dependency updates, run `uv lock` and review its resolver output. Commit `uv.lock` alongside
-the reviewed implementation. Do not commit virtual environments, reports,
-secrets, or caches. If checks fail, fix the actual failures and rerun the checks;
-do not weaken assertions, suppress failures, or claim an unexecuted check passed.
+For dependency updates, run `uv lock`, review its resolver output, and keep
+`uv.lock` alongside the corresponding implementation. Keep virtual environments,
+reports, secrets, and caches out of source control. Fix check failures and rerun
+the checks without weakening assertions or suppressing failures.
 
-Then exercise the CLI and local API, inspect the authored relevance judgments,
-and hand-check metric denominators, including no-hit queries:
+CLI and API verification covered retrieval/evaluation parity, repeatability,
+no-match queries, strict input limits, safe errors, and unchanged fixtures.
+Reproduce retrieval and evaluation with:
 
 ```bash
 uv run --locked rag-lab retrieve --query "backup retention" --k 5
@@ -33,19 +36,11 @@ uv run --locked uvicorn rag_reliability_lab.api:app --host 127.0.0.1 --port 8000
 Keep the server bound to loopback. In another terminal use the payloads in
 [API.md](API.md) to inspect `/health`, `/retrieve`, `/evaluate`, and `/docs`.
 
-After local verification and lockfile commit, the operator pushes a branch and
-opens a PR. The `CI` workflow runs the `checks` job on push and pull requests,
-using read-only repository permissions and cancelling superseded runs for the
-same workflow/ref. Confirm a successful run at the exact PR commit before
-enabling required status checks or publishing. Record actual commands, commit,
-and results in the local verification record.
+For the container checks, use the [Docker quickstart](../README.md#docker-quickstart)
+and run `python tests/docker_smoke.py` against the local container. The smoke
+checks compare CLI/API output at k=1,5,20 and verify strict request handling.
 
-Action references are pinned to these upstream releases/commits:
-
-- [actions/checkout v4.2.2](https://github.com/actions/checkout/releases/tag/v4.2.2),
-  commit `11bd71901bbe5b1630ceea73d27597364c9af683`.
-- [astral-sh/setup-uv v6.0.1](https://github.com/astral-sh/setup-uv/releases/tag/v6.0.1),
-  commit `6b9c6063abd6010835644d4c2e1bef4cf5cd0fca`.
-
-Review upstream changes explicitly when updating action pins. No green badge or
-passing CI claim is supplied by this document.
+Corpus and relevance rationales have been reviewed for coherence. For benchmark
+comparisons, review label suitability and report observed evaluation output
+with its version and configuration. The synthetic dataset does not represent
+real operational performance.

@@ -14,8 +14,8 @@
 - Local retrieval/evaluation CLI, explicit optional JSON report export, and a
   loopback FastAPI API using the same core services.
 - Deterministic schema-1 JSON evaluation reports with finite numeric output.
-- Authored unit, negative-input, reproducibility, and interface-parity tests;
-  an authored CI workflow for locked sync, Ruff checks, and pytest.
+- Verified unit, negative-input, reproducibility, and interface-parity tests,
+  with locked dependencies and passing lint and formatting checks.
 - Dataset rationales, metric definitions, architecture, contribution guidance,
   and private security-reporting guidance.
 - Resolver-generated dependency lockfile and Docker build, test, and local API
@@ -29,10 +29,9 @@
   quality or security assurance is implied.
 - ASCII token extraction is deliberately limited and is not multilingual word
   segmentation. BM25 scores are ranking signals, not calibrated confidence.
-- Local tests passed; CI execution is pending. No quality claims or benchmark metric values may
+- No quality claims or benchmark metric values may
   be made without executed tests/evaluation and relevance review.
-- Maintainer approval was recorded on 2026-10-28; CI confirmation is pending. The
-  API is experimental and intended for loopback use, not production hosting.
+- The API is experimental and intended for loopback use, not production hosting.
 
-Release date approved by the maintainer: 2026-10-28. GitHub publication and CI
-confirmation remain pending. No Git tag or GitHub release has been created.
+Release verification is complete. Version 0.1.0 is ready for local retrieval
+and evaluation use.

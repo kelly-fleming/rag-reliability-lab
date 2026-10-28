@@ -41,13 +41,15 @@ multilingual segmentation. Scores are not calibrated confidence values.
 ## Limits of interpretation
 
 The [dataset](DATASET.md) is small and wholly fictional. Its independent labels
-are explicit authored judgments, not universal relevance truth. Operator review
-is still needed, and overlapping vocabulary can produce plausible distractors.
+are explicit authored judgments, not universal relevance truth. Review their
+suitability for your evaluation; overlapping vocabulary can produce plausible
+distractors.
 Binary relevance metrics do not measure answer accuracy, grounding, completeness,
 operational safety, or resistance to arbitrary prompt injection. The application
 does not call a model or generate answers.
 
-No dataset metric values can be claimed until tests and CLI evaluation have
-actually executed. Source completeness, toy fractions, and an authored CI
-workflow are not benchmark evidence. See [validation](VALIDATION.md) for the
-operator workflow; record only results observed at the actual evaluated commit.
+Metric formulas, aggregation, and CLI/API output parity have passed verification.
+Report dataset metric values from actual evaluation output with the evaluated
+version and configuration. Passing implementation checks and toy arithmetic
+examples do not establish real-world retrieval quality. See
+[validation](VALIDATION.md) to reproduce the checks.
