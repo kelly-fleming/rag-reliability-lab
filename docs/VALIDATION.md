@@ -32,9 +32,6 @@ uv run --locked uvicorn rag_reliability_lab.api:app --host 127.0.0.1 --port 8000
 
 Keep the server bound to loopback. In another terminal use the payloads in
 [API.md](API.md) to inspect `/health`, `/retrieve`, `/evaluate`, and `/docs`.
-The full operator publication checklist is in
-[HUMAN_VERIFICATION.md](../HUMAN_VERIFICATION.md); these are future operator
-actions, not actions performed while authoring this workflow.
 
 After local verification and lockfile commit, the operator pushes a branch and
 opens a PR. The `CI` workflow runs the `checks` job on push and pull requests,

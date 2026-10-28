@@ -12,12 +12,10 @@ def test_readme_required_references_and_local_documentation_links():
         "docs/DATASET.md",
         "docs/METRICS.md",
         "docs/ARCHITECTURE.md",
-        "ROADMAP.md",
     ):
         assert f"]({target})" in readme
     documents = [
         ROOT / "README.md",
-        ROOT / "ROADMAP.md",
         *sorted((ROOT / "docs").glob("*.md")),
     ]
     for document in documents:
@@ -45,5 +43,5 @@ def test_readme_documents_current_commands_and_verification_scope():
         assert command in readme
     assert "retrieval-only" in readme
     assert "does not generate" in readme
-    assert "Local tests and Docker runtime checks have passed" in readme
-    assert "Maintainer approval is recorded; CI execution remains pending" in readme
+    assert "Gold judgments require operator review before publishing scores" in readme
+    assert "not probabilities or confidence estimates" in readme

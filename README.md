@@ -86,8 +86,8 @@ intentional distractors. No live customer data, provider accounts, or secrets
 are included. Gold judgments require operator review before publishing scores.
 
 Read the [dataset and relevance rationales](docs/DATASET.md),
-[metric definitions and limitations](docs/METRICS.md),
-[architecture](docs/ARCHITECTURE.md), and [roadmap](ROADMAP.md).
+[metric definitions and limitations](docs/METRICS.md), and
+[architecture](docs/ARCHITECTURE.md).
 Retrieval relevance does not establish factual correctness, safe operational
 guidance, or the quality of a generated answer. BM25 scores are ranking signals,
 not probabilities or confidence estimates.
