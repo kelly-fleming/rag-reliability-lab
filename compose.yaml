@@ -1,0 +1,16 @@
+name: rag-reliability-lab
+services:
+  api:
+    build:
+      context: .
+      target: runtime
+    ports:
+      - "127.0.0.1:8000:8000"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+  test:
+    profiles: [tools]
+    build:
+      context: .
+      target: test

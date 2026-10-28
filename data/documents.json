@@ -1,0 +1,86 @@
+[
+  {
+    "id": "doc-001",
+    "title": "Nimbus Queue: worker backlog runbook",
+    "body": "Nimbus Queue is a fictional job dispatch service. When queue age rises, compare arrival rate with completed jobs and inspect worker heartbeat gaps. A growing backlog with healthy heartbeats usually means slow downstream processing; missing heartbeats suggest unavailable workers. Pause the synthetic bulk producer before increasing worker concurrency. Resume it gradually after queue age falls for three observation windows. Do not purge jobs to reduce the backlog metric. This runbook addresses job processing, not the packet queues in the network gateway.",
+    "tags": ["runbook", "nimbus-queue", "backlog", "workers"]
+  },
+  {
+    "id": "doc-002",
+    "title": "Nimbus Queue: retry storm incident follow-up",
+    "body": "A fictional Nimbus Queue incident began when workers retried failed Atlas Ledger writes immediately. Retries multiplied arrivals while the ledger remained slow, causing queue age and duplicate attempts to rise. Operators paused the bulk producer and restored a capped exponential retry delay with jitter. Follow-up actions are to limit attempts, attach a stable job deduplication key, and alert on the retry-to-original-job ratio. Adding workers alone would have increased pressure on Atlas Ledger. No real incident or production measurements are represented here.",
+    "tags": ["incident", "nimbus-queue", "retries", "atlas-ledger"]
+  },
+  {
+    "id": "doc-003",
+    "title": "Atlas Ledger: backup retention policy",
+    "body": "Atlas Ledger is a fictional transaction journal. Its synthetic backup policy retains daily snapshots for fourteen days and weekly snapshots for eight weeks in an isolated recovery store. A backup writer may create snapshots but may not delete retained copies. Expiration belongs to a separate retention role. Before changing retention, document the recovery objective and confirm that the most recent restore rehearsal used a retained snapshot. Replication supports availability but does not replace backups because accidental deletion can replicate too. This policy does not govern application log retention.",
+    "tags": ["policy", "atlas-ledger", "backup", "retention"]
+  },
+  {
+    "id": "doc-004",
+    "title": "Atlas Ledger: isolated restore rehearsal",
+    "body": "For a fictional Atlas Ledger recovery rehearsal, select a retained backup snapshot and restore it into an isolated scratch ledger. Keep the scratch endpoint disconnected from producers. Compare record counts and a predetermined sample of journal checksums against the snapshot manifest, then record the simulated recovery duration and any gaps. A completed snapshot alone is not evidence of a usable restore. Remove the scratch ledger after the rehearsal record is saved. Consult the backup retention policy when choosing snapshot age; do not change retention merely to make the rehearsal pass.",
+    "tags": ["runbook", "atlas-ledger", "backup", "restore"]
+  },
+  {
+    "id": "doc-005",
+    "title": "Prism API: service identity permissions",
+    "body": "Prism API is a fictional request service that reads selected Atlas Ledger summaries. Give its runtime identity read access only to the summary collection. Keep deployment permissions in a separate release identity and deny the runtime identity access to backup deletion and role management. During permission troubleshooting, inspect the denied action and resource before broadening a role. A successful identity token exchange does not prove authorization for a ledger read. Review unused grants during each synthetic release cycle. No actual provider roles, account numbers, or credentials are included.",
+    "tags": ["iam", "prism-api", "least-privilege", "authorization"]
+  },
+  {
+    "id": "doc-006",
+    "title": "Emergency access: temporary role procedure",
+    "body": "In this fictional environment, emergency access uses a separate temporary operator role with a stated incident purpose and a short expiration. Record approval before activation, limit the role to the affected service, and retain an audit record of privileged changes. Revoke the grant when mitigation ends even if the expiration has not arrived. Review actions afterward and replace any recurring emergency step with a narrowly scoped routine permission. The backup retention role is not an emergency administrator role. This is synthetic IAM guidance, not a live access mechanism.",
+    "tags": ["iam", "emergency-access", "audit", "expiration"]
+  },
+  {
+    "id": "doc-007",
+    "title": "Zephyr Gateway: private route timeout runbook",
+    "body": "Zephyr Gateway is a fictional private network gateway. For connection timeouts between Prism API and Atlas Ledger, first confirm name resolution, then inspect the forward route and return route between their synthetic subnets. Check gateway packet-drop counters and narrow firewall rules for the intended service port. If name resolution fails, use the resolver runbook instead of editing routes. A reachable gateway does not prove that the destination has a valid return path. Packet queue saturation is distinct from a Nimbus Queue job backlog; scaling job workers will not repair a missing route.",
+    "tags": ["network", "zephyr-gateway", "routing", "timeout"]
+  },
+  {
+    "id": "doc-008",
+    "title": "Prism API: stale resolver cache incident",
+    "body": "In a fictional Prism API incident, a service endpoint changed but one resolver pool continued serving an expired address. Requests failed before reaching the new Atlas Ledger endpoint. Operators compared answers across resolver pools, corrected the cache expiration setting, and refreshed only the affected cache. Routes and firewall permissions were unchanged. Follow-up work adds an alert for answers older than the declared DNS lifetime and a resolver comparison to endpoint-change procedures. This incident concerns name resolution; it does not establish a general fix for every connection timeout.",
+    "tags": ["incident", "prism-api", "dns", "cache"]
+  },
+  {
+    "id": "doc-009",
+    "title": "Cinder Archive: cross-zone transfer cost anomaly",
+    "body": "Cinder Archive is a fictional object archive. A synthetic cost anomaly arose when restore rehearsals repeatedly copied the same archive objects across zones. Break transfer charges down by source, destination, and operation before changing storage retention. Schedule rehearsal readers near the recovery store and reuse a local scratch copy within a single rehearsal where policy permits. Preserve the required retained backups. Deleting historical snapshots would not fix the repeated transfer pattern. Track transferred bytes alongside restore frequency to distinguish this anomaly from increased object storage capacity.",
+    "tags": ["cost", "cinder-archive", "transfer", "restore"]
+  },
+  {
+    "id": "doc-010",
+    "title": "Orchid Compute: idle capacity cost runbook",
+    "body": "Orchid Compute is a fictional worker pool used for scheduled batch experiments. When compute cost rises without more completed jobs, compare allocated worker hours, busy worker hours, and the schedule for synthetic jobs. An obsolete minimum-capacity override can leave idle workers running overnight. Remove that override through the normal configuration path and preserve enough capacity for the next scheduled batch. Confirm that job backlog is not growing before reducing the pool. This runbook concerns idle compute allocation rather than Cinder Archive transfer fees or backup retention.",
+    "tags": ["cost", "orchid-compute", "capacity", "workers"]
+  },
+  {
+    "id": "doc-011",
+    "title": "Prism API: application log retention policy",
+    "body": "The fictional Prism API keeps synthetic request diagnostic logs for seven days, then expires them through the log store lifecycle policy. Store aggregate error counts separately for longer trend comparisons. Exclude request bodies and access tokens from diagnostic logs. An application log export is not an Atlas Ledger recovery backup and cannot reconstruct journal records. When investigating rising storage cost, compare log volume with request and error rates before shortening retention. This document governs observability data only; the ledger backup policy defines snapshot retention independently.",
+    "tags": ["policy", "prism-api", "logs", "retention"]
+  },
+  {
+    "id": "doc-012",
+    "title": "Helix Cache: safe cold-cache recovery",
+    "body": "Helix Cache is a fictional read cache in front of Atlas Ledger summaries. After a cache restart, a low hit ratio can send excessive reads to the ledger. Warm only the frequently requested summary keys and cap concurrent cache misses while the hit ratio recovers. Avoid flushing all keys repeatedly, since each flush recreates the cold-cache load. Cache expiration controls freshness and does not define backup retention. If Prism API receives an authorization denial rather than a slow read, inspect its service identity permissions instead of treating the error as a cache miss.",
+    "tags": ["runbook", "helix-cache", "recovery", "latency"]
+  },
+  {
+    "id": "doc-013",
+    "title": "Atlas Ledger: replication lag response",
+    "body": "Atlas Ledger replicas are fictional read copies of the journal. If replication lag rises, compare incoming write volume with replica apply throughput and inspect replica storage pressure. Route freshness-sensitive reads to the primary while preserving a bounded read load. Do not delete replica journals to make the lag counter disappear. After throughput recovers, wait for the replica position to catch up before restoring normal read routing. Replication lag is not the same as Nimbus Queue age, and a current replica does not replace a retained backup for recovery from accidental deletion.",
+    "tags": ["runbook", "atlas-ledger", "replication", "lag"]
+  },
+  {
+    "id": "doc-014",
+    "title": "Zephyr Gateway: packet queue saturation follow-up",
+    "body": "A fictional Zephyr Gateway incident caused intermittent packet loss during a burst of archive restore traffic. Route tables and resolver answers were correct, but packet queue drops increased with transfer concurrency. Operators capped concurrent archive copies and scheduled bulk restore rehearsals outside the synthetic request peak. Follow-up actions add packet-drop visibility and a transfer concurrency budget. This network queue does not contain Nimbus Queue jobs. Increasing application retry attempts during packet loss can amplify the burst, so callers should retain their bounded retry policy while network load is reduced.",
+    "tags": ["incident", "zephyr-gateway", "packet-loss", "queue"]
+  }
+]
