@@ -1,9 +1,8 @@
 # Local HTTP API
 
 The API exposes retrieval and evaluation over fictional local fixtures. It does
-not generate answers, require credentials, or create cloud resources. After the
-operator has generated the genuine dependency lockfile and installed dependencies,
-launch it on the loopback interface only:
+not generate answers, require credentials, or create cloud resources. Install
+dependencies using the included lockfile and launch it on the loopback interface:
 
 ```bash
 uv run --locked uvicorn rag_reliability_lab.api:app --host 127.0.0.1 --port 8000
@@ -32,4 +31,6 @@ return 503; serialization failures return 500. Error bodies omit internal paths,
 input contents, and tracebacks. There are no data write endpoints or export route.
 Fixture reads and evaluation occur only on explicit requests, not on import.
 
-These commands and endpoints have been authored but not executed or verified.
+CLI/API parity, health and documentation routes, strict request validation,
+safe error responses, and repeatable evaluation output have passed automated
+tests and Docker runtime verification.

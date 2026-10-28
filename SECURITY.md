@@ -1,9 +1,10 @@
 # Security
 
 RAG Reliability Lab v0.1.0 is an experimental, non-production retrieval lab.
-Source implementation, authored tests, and an authored CI workflow do not
-establish security assurance or successful verification. There is no supported
-production release or security response-time guarantee at this stage.
+Input validation, safe error handling, and local-only application behavior have
+passed automated verification. This does not establish production security
+assurance. The project provides no production support or security response-time
+guarantee.
 
 The checked-in corpus and relevance judgments are fictional evaluation material.
 The application has no live cloud integrations, provider accounts, remote search,

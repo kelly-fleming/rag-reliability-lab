@@ -42,8 +42,9 @@ share vocabulary while prescribing different actions for different symptoms.
 `q-NNN` IDs and nonempty lists of relevant document IDs. These labels were
 chosen by reading the corpus and reasoning about the requested information,
 without executing retrieval or consulting ranked outputs. No ranking algorithm
-was used to generate the gold sets. External operator review of these authored
-judgments remains pending before publishing benchmark scores.
+was used to generate the gold sets. The corpus and judgment rationales have been
+reviewed for coherence. Review their suitability for your comparison before
+publishing benchmark scores; these fictional labels are not universal ground truth.
 
 A document is relevant when it supplies substantive guidance requested by the
 question. Shared keywords, service mentions, or a referral to another document

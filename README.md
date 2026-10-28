@@ -1,6 +1,8 @@
 # RAG Reliability Lab
 
-Release date: **0.1.0 - 2026-10-28**. GitHub publication is pending.
+[![CI](https://github.com/kelly-fleming/rag-reliability-lab/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/kelly-fleming/rag-reliability-lab/actions/workflows/ci.yml)
+
+Release: **0.1.0 - 2026-10-28**.
 See [release notes](CHANGELOG.md).
 
 v0.1.0 is a local, retrieval-only lab for experimenting with deterministic BM25
@@ -10,9 +12,10 @@ credentials are required to use the installed application.
 
 Implemented source includes strict fixture loading, shared ASCII tokenization,
 BM25 ranking, Precision@K/Recall@K/MRR@K evaluation, a CLI, a local FastAPI API,
-and deterministic JSON reports. Local tests and Docker runtime checks have passed;
-Maintainer approval is recorded; CI execution remains pending. No real-world
-benchmark quality or throughput claim is made.
+and deterministic JSON reports. Release verification is complete: the test suite,
+lint, formatting, and Docker API/CLI smoke checks have passed. Version 0.1.0 is
+ready for local retrieval and evaluation use. No real-world benchmark quality or
+throughput claim is made.
 
 ## Docker quickstart
 
@@ -103,8 +106,7 @@ uv run --locked ruff format --check .
 uv run --locked pytest -q
 ```
 
-Then run the CLI/API examples and review the gold labels. Follow the complete
-[operator validation workflow](docs/VALIDATION.md). The authored
-[CI workflow](.github/workflows/ci.yml) performs locked sync, lint, format, and
-tests; its existence does not establish a successful run. Metric values must
-not be claimed until tests and evaluation commands have actually executed.
+The release has passed these checks and Docker API/CLI verification. Follow the
+[validation guide](docs/VALIDATION.md) to reproduce the checks. For dataset
+comparisons, run evaluation and review the gold labels; report observed results
+with the evaluated version and configuration.

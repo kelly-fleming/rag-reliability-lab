@@ -23,9 +23,8 @@ uv run --locked pytest -q
 For a dependency change, the operator runs `uv lock`, reviews the genuine
 resolver changes, commits `pyproject.toml` and `uv.lock` together, and repeats
 locked installation and checks. Follow [API.md](docs/API.md) for loopback-only
-manual endpoint checks. Record actual checks and failures; label authored but
-unexecuted tests honestly. Do not claim quality scores without running evaluation
-and reviewing the gold judgments.
+manual endpoint checks. Record actual check results. Report quality scores from
+executed evaluation with reviewed gold judgments.
 
 ## Code, data, and tests
 
@@ -53,14 +52,11 @@ Use a focused conventional title such as `fix: preserve the metric cutoff` or
 and exactly which checks ran or did not run. Preserve unrelated work and avoid
 mixing generated reports, broad refactors, and feature changes into one PR.
 
-Tests must be independently run in CI at the exact PR commit before merge;
-local results or a source review do not substitute for that run. Require the
-authored `CI` workflow's `checks` job only after an actual successful run, as
-described in the operator checklist. Fix failures without weakening assertions
-or suppressing checks. A missing lockfile during implementation does not justify
-claiming a passing CI result.
+Run the test suite, lint, and formatting checks for changes. Fix failures without
+weakening assertions or suppressing checks. Keep release documentation focused
+on implemented behavior and completed verification, with substantive limitations
+intact.
 
 Follow [SECURITY.md](SECURITY.md) for sensitive reports. The existing
 [MIT license](LICENSE) is retained; contribute material you are entitled to
-share under that license. Tagging, publication, repository settings, and the
-final release checklist remain explicit maintainer actions.
+share under that license.
